@@ -106,14 +106,23 @@
                     </a>
 
                     <div class="user-menu dropdown-menu">
-                        <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                        <a class="nav-link" href="#"><i class="fa fa- user"></i>Minha Conta</a>
 
-                        <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span
+                        <a class="nav-link" href="#"><i class="fa fa- user"></i>Notificações <span
                                     class="count">13</span></a>
 
-                        <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
+                        <a class="nav-link" href="#"><i class="fa fa -cog"></i>Configurações</a>
 
-                        <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                        <a class="nav-link" href="http://localhost:8000/logout" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <i class="fa fa-power -off"></i>Deslogar</a>
+
+                        <form id="logout-form"
+                              action="http://localhost:8000/logout"
+                              method="POST" style="display: none;">
+                            {!! csrf_field() !!}
+                        </form>
+
                     </div>
                 </div>
             </div>

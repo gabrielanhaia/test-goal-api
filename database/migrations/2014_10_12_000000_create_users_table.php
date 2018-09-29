@@ -21,6 +21,13 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->integer('access_type_id')
+                ->unsigned();
+
+            $table->foreign('access_type_id')
+                ->references('id')->on('access_types')
+                ->onDelete('cascade');
         });
     }
 

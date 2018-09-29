@@ -7,6 +7,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * Model de usuários.
+ *
+ * @package App
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -28,6 +33,16 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the access type of user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function accessType()
+    {
+        return $this->hasOne(AccessType::class, 'id', 'access_type_id');
+    }
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
