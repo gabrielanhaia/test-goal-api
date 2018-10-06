@@ -28,6 +28,8 @@
     <link href="{{ URL::asset('admin/assets/css/lib/vector-map/jqvmap.min.css') }}" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    @yield('top')
 </head>
 <body>
 
@@ -46,30 +48,8 @@
             <a class="navbar-brand hidden" href="./"><img src="{{ URL('admin/images/logo2.png') }}" alt="G"></a>
         </div>
 
-        <div id="main-menu" class="main-menu collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="index.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
-                </li>
-                <h3 class="menu-title">Projetos</h3><!-- /.menu-title -->
-                <li class="menu-item-has-children dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-building"></i>Construções</a>
-                    <ul class="sub-menu children dropdown-menu">
-                        <li><i class="menu-icon fa fa-home"></i><a href="page-login.html">Clientes</a></li>
-                        <li><i class="menu-icon fa fa-home"></i><a href="page-register.html">Site</a></li>
-                    </ul>
-                </li>
-                <h3 class="menu-title">Administração</h3><!-- /.menu-title -->
+        @include('admin.layout.menu')
 
-                <li>
-                    <a href="widgets.html"> <i class="menu-icon fa fa-user"></i>Usuários </a>
-                </li>
-                <li>
-                    <a href="widgets.html"> <i class="menu-icon fa fa-cogs"></i>Configurações </a>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
     </nav>
 </aside><!-- /#left-panel -->
 
@@ -102,7 +82,8 @@
                 <div class="user-area dropdown float-right">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
-                        <img class="user-avatar rounded-circle" src="{{ URL('admin/images/admin.jpg') }}" alt="User Avatar">
+                        <img class="user-avatar rounded-circle" src="{{ URL('admin/images/admin.jpg') }}"
+                             alt="User Avatar">
                     </a>
 
                     <div class="user-menu dropdown-menu">
@@ -143,15 +124,26 @@
             <div class="page-header float-right">
                 <div class="page-title">
                     <ol class="breadcrumb text-right">
-                        <li class="active">Dashboard</li>
+
+                        @if (empty($breadcrumbs))
+                            <li class="active"><a href="{{ url('/') }}">Dashboard</a></li>
+                        @else
+                            @foreach($breadcrumbs as $crumb)
+                                <li class="{{ $crumb['class'] }}">
+                                    <a href="{{ $crumb['url'] }}">{{ $crumb['name'] }}</a>
+                                </li>
+                            @endforeach
+                            <li><a href="{{ url('/') }}">Dashboard</a></li>
+                        @endif
                     </ol>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="content mt-3">
 
+    <div class="content mt-3">
+        @yield('page_content')
     </div> <!-- .content -->
 </div><!-- /#right-panel -->
 
@@ -169,5 +161,7 @@
 <script src="{{  URL::asset('admin/assets/js/lib/vector-map/jquery.vmap.js') }}"></script>
 <script src="{{  URL::asset('admin/assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
 <script src="{{  URL::asset('admin/assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script>
+
+@yield('botton')
 </body>
 </html>
