@@ -130,7 +130,7 @@
                         @else
                             @foreach($breadcrumbs as $crumb)
                                 <li class="{{ $crumb['class'] }}">
-                                    <a href="{{ $crumb['url'] }}">{{ $crumb['name'] }}</a>
+                                    <a href="{{ url($crumb['url']) }}">{{ $crumb['name'] }}</a>
                                 </li>
                             @endforeach
                             <li><a href="{{ url('/') }}">Dashboard</a></li>

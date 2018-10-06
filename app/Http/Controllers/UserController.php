@@ -37,4 +37,31 @@ class UserController extends Controller
             ]
         ]);
     }
+
+    /**
+     * Editar usuários.
+     *
+     * @param integer $userId Identificador do usuário a ser editado.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function edit($userId)
+    {
+        $user = User::find($userId);
+
+        return view('admin.users.edit', [
+            'user' => $user,
+            'breadcrumbs' => [
+                [
+                    'name' => 'Editar Usuário',
+                    'url' => '',
+                    'class' => 'active'
+                ],
+                [
+                    'name' => 'Listar Usuários',
+                    'url' => 'usuarios',
+                    'class' => ''
+                ]
+            ]
+        ]);
+    }
 }
