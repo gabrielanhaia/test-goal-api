@@ -155,9 +155,9 @@
 <script src="{{  URL::asset('admin/assets/js/main.js') }}"></script>
 
 
-<script src="{{  URL::asset('admin/assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
-<script src="{{  URL::asset('admin/assets/js/dashboard.js') }}"></script>
-<script src="{{  URL::asset('admin/assets/js/widgets.js') }}"></script>
+{{--<script src="{{  URL::asset('admin/assets/js/lib/chart-js/Chart.bundle.js') }}"></script>--}}
+{{--<script src="{{  URL::asset('admin/assets/js/dashboard.js') }}"></script>--}}
+{{--<script src="{{  URL::asset('admin/assets/js/widgets.js') }}"></script>--}}
 <script src="{{  URL::asset('admin/assets/js/lib/vector-map/jquery.vmap.js') }}"></script>
 <script src="{{  URL::asset('admin/assets/js/lib/vector-map/jquery.vmap.min.js') }}"></script>
 <script src="{{  URL::asset('admin/assets/js/lib/vector-map/jquery.vmap.sampledata.js') }}"></script>

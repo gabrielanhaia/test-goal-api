@@ -21,7 +21,7 @@
         $(document).ready(function () {
             $('#bootstrap-data-table-export').DataTable();
 
-            $(".delete_user").click(function (e) {
+            $(".delete_project").click(function (e) {
                 e.preventDefault()
                 let urlDelete = $(this).attr('href')
 
@@ -48,44 +48,44 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <strong class="card-title pr-3">Lista de Usuários</strong>
-                        <a href="{{ url('usuarios/cadastrar') }}">
+                        <strong class="card-title pr-3">Lista de Projetos</strong>
+                        <a href="{{ url('projetos/cadastrar') }}">
                             <button type="button"
                                     class="btn btn-success btn-sm">Cadastrar Novo
                             </button>
-                    </a>
+                        </a>
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
                             <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th>Tipo</th>
-                                <th>Email</th>
+                                <th>Titulo</th>
+                                <th>Endereço</th>
                                 <th>Opções</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($users as $user)
-                                <tr>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->accessType->type == 'admin' ? 'Administrador' : 'Usuário' }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td class="text-center">
-                                        <a href="{{ url('usuarios/editar/' . $user->id) }}">
-                                            <i class="fa fa-pencil fa-2x"></i>
-                                        </a>
-                                        @if ($user->id != Auth::user()->id)
-                                            <a class="delete_user" href="{{ url('usuarios/deletar/' . $user->id) }}">
-                                                <i class="fa fa-trash pl-3 fa-2x"
-                                                        style="color: firebrick"></i>
+                            @if (!empty($projects))
+                                @foreach($projects as $project)
+                                    <tr>
+                                        <td>{{ $project->title }}</td>
+                                        <td>{{ $project->address }}</td>
+                                        <td class="text-center">
+                                            <a href="{{ url('projetos/editar/' . $project->id) }}" class="pr-2">
+                                                <i class="fa fa-pencil fa-2x"></i>
                                             </a>
-                                        @else
-                                            <i class="fa fa-trash pl-3 fa-2x" style="color: gray"></i>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
+                                            <a href="{{ url('projetos/' . $project->id) . '/albuns' }}" class="pr-2">
+                                                <i class="fa fa-image fa-2x"></i>
+                                            </a>
+                                            {{--<a class="delete_project" href="{{ url('projetos/deletar/' . $project->id) }}"><i--}}
+                                                        {{--class="fa fa-trash pl-3"--}}
+                                                        {{--style="color: firebrick"></i>--}}
+                                            {{--</a>--}}
+
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
                             </tbody>
                         </table>
                     </div>

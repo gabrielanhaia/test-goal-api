@@ -10,18 +10,17 @@
 @section('page_content')
     <div class="col-lg-12">
         <form action="" method="post" class="form-horizontal" id="form">
+            {{ csrf_field() }}
             <div class="card">
                 <div class="card-header">
-                    <strong>Editar</strong> Usuário
+                    <strong>Cadastrar</strong> Usuário
                 </div>
                 <div class="card-body card-block">
-                    {{ method_field('PUT') }}
-                    {{ csrf_field() }}
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nome</label></div>
                         <div class="col-12 col-md-9">
                             <input type="text" id="text-input" name="name" placeholder="Nome" required class="form-control"
-                                   value="{{ $user->name }}">
+                                   value="{{ old('name') }}">
                             <small class="form-text text-muted">Nome da pessoa.</small>
                         </div>
                     </div>
@@ -30,7 +29,7 @@
                         </div>
                         <div class="col-12 col-md-9"><input type="email" id="email-input" required name="email"
                                                             placeholder="Email" class="form-control"
-                                                            value="{{ $user->email }}">
+                                                            value="{{ old('email') }}">
                             <small class="help-block form-text">Endereço de email usado no login.</small>
                         </div>
                     </div>
@@ -39,7 +38,6 @@
                         </div>
                         <div class="col-12 col-md-9"><input type="password" id="password-input" name="password"
                                                             placeholder="Nova Senha" class="form-control">
-                            <small class="help-block form-text">Deixar em branco para não alterar a senha.</small>
                         </div>
                     </div>
                     <div class="row form-group">
@@ -47,7 +45,7 @@
                                                          class=" form-control-label">Descrição</label></div>
                         <div class="col-12 col-md-9"><textarea name="description" id="textarea-input" rows="9"
                                                                placeholder="Sobre o usuário"
-                                                               class="form-control">{{ $user->description }}</textarea></div>
+                                                               class="form-control">{{ old('description') }}</textarea></div>
                     </div>
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="select" class=" form-control-label">Tipo de Conta</label>
@@ -55,7 +53,7 @@
                         <div class="col-12 col-md-9">
                             <select name="type" id="type" class="form-control">
                                 <option value="user">Usuário</option>
-                                <option value="admin" {{ ($user->accessType->type == 'admin' ? 'selected' : '') }}>
+                                <option value="admin" {{ (old('type') == 'admin' ? 'selected' : '') }}>
                                     Administrador
                                 </option>
                             </select>
@@ -64,7 +62,7 @@
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary btn-sm">
-                        <i class="fa fa-dot-circle-o"></i> Atualizar
+                        <i class="fa fa-dot-circle-o"></i> Cadastrar
                     </button>
                     <a href="{{ url('usuarios') }}">
                         <button type="button" class="btn btn-danger btn-sm">

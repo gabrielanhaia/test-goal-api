@@ -22,7 +22,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'description', 'access_type_id'
     ];
 
     /**
@@ -42,6 +42,15 @@ class User extends Authenticatable implements JWTSubject
     public function accessType()
     {
         return $this->hasOne(AccessType::class, 'id', 'access_type_id');
+    }
+
+    /**
+     * The projects that belong to the users.
+     */
+    public function projects()
+    {
+        return $this->belongsToMany('App\Project')
+            ->withTimestamps();
     }
 
     /**
