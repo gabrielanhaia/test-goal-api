@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Album;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
@@ -20,11 +21,10 @@ class Project extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function albums()
     {
-        return $this->belongsToMany('App\Album')
-            ->withTimestamps();
+        return $this->hasMany(Album::class)->orderBy('updated_at');
     }
 }

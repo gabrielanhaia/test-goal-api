@@ -61,6 +61,7 @@
                             <tr>
                                 <th>Titulo</th>
                                 <th>Endereço</th>
+                                <th>Nº de Albuns</th>
                                 <th>Opções</th>
                             </tr>
                             </thead>
@@ -70,6 +71,7 @@
                                     <tr>
                                         <td>{{ $project->title }}</td>
                                         <td>{{ $project->address }}</td>
+                                        <td>{{ $project->albums->count() }}</td>
                                         <td class="text-center">
                                             <a href="{{ url('projetos/editar/' . $project->id) }}" class="pr-2">
                                                 <i class="fa fa-pencil fa-2x"></i>
