@@ -26,6 +26,6 @@ class Album extends Model
      */
     public function photos()
     {
-        return $this->hasMany(\App\Photo::class);
+        return $this->hasMany(\App\Photo::class)->orderBy('updated_at');
     }
 }

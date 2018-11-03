@@ -5,7 +5,7 @@
     <link href="{{ URL::asset('admin/fine-uploader/fine-uploader-new.css') }}" rel="stylesheet">
     <script src="{{ URL::asset('admin/fine-uploader/jquery.fine-uploader.js') }}"></script>
     <script type="text/template" id="qq-template-manual-trigger">
-        <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Drop files here">
+        <div class="qq-uploader-selector qq-uploader" qq-drop-area-text="Largue arquivos aqui">
             <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
                 <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
             </div>
@@ -14,7 +14,7 @@
             </div>
             <div class="buttons">
                 <div class="qq-upload-button-selector qq-upload-button">
-                    <div>Select files</div>
+                    <div>Selecionar</div>
                 </div>
                 <button type="button" id="trigger-upload" class="btn btn-primary">
                     <i class="icon-upload icon-white"></i> Upload
@@ -35,9 +35,9 @@
                     <span class="qq-edit-filename-icon-selector qq-edit-filename-icon" aria-label="Edit filename"></span>
                     <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
                     <span class="qq-upload-size-selector qq-upload-size"></span>
-                    <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancel</button>
-                    <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Retry</button>
-                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Delete</button>
+                    <button type="button" class="qq-btn qq-upload-cancel-selector qq-upload-cancel">Cancelar</button>
+                    <button type="button" class="qq-btn qq-upload-retry-selector qq-upload-retry">Tentar Novamente</button>
+                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">Deletar</button>
                     <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
                 </li>
             </ul>
@@ -45,15 +45,15 @@
             <dialog class="qq-alert-dialog-selector">
                 <div class="qq-dialog-message-selector"></div>
                 <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Close</button>
+                    <button type="button" class="qq-cancel-button-selector">Fechar</button>
                 </div>
             </dialog>
 
             <dialog class="qq-confirm-dialog-selector">
                 <div class="qq-dialog-message-selector"></div>
                 <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">No</button>
-                    <button type="button" class="qq-ok-button-selector">Yes</button>
+                    <button type="button" class="qq-cancel-button-selector">Não</button>
+                    <button type="button" class="qq-ok-button-selector">Sim</button>
                 </div>
             </dialog>
 
@@ -61,7 +61,7 @@
                 <div class="qq-dialog-message-selector"></div>
                 <input type="text">
                 <div class="qq-dialog-buttons">
-                    <button type="button" class="qq-cancel-button-selector">Cancel</button>
+                    <button type="button" class="qq-cancel-button-selector">Cancelar</button>
                     <button type="button" class="qq-ok-button-selector">Ok</button>
                 </div>
             </dialog>
@@ -117,7 +117,11 @@
                             $('#fine-uploader-manual-trigger').fineUploader({
                                 template: 'qq-template-manual-trigger',
                                 request: {
-                                    endpoint: '/projetos'
+                                    endpoint: "{{ url('api/images/') }}",
+                                    params: {
+                                        _token: "{{ csrf_token() }}",
+                                        album_id: "{{ $album->id }}"
+                                    }
                                 },
                                 thumbnails: {
                                     placeholders: {
@@ -125,7 +129,18 @@
                                         notAvailablePath: '/source/placeholders/not_available-generic.png'
                                     }
                                 },
-                                autoUpload: false
+                                session: {
+                                    endpoint: "{{ url('api/images/') . '/' . $album->id }}",
+                                    params: {
+                                        _token: "{{ csrf_token() }}"
+                                    }
+                                },
+                                autoUpload: false,
+                                deleteFile: {
+                                    enabled: true,
+                                    forceConfirm: true,
+                                    endpoint: 'server/file'
+                                }
                             });
 
                             $('#trigger-upload').click(function() {
