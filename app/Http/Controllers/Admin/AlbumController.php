@@ -44,7 +44,27 @@ class AlbumController extends Controller
                 ]
             ]
         ]);
+    }
 
+    /**
+     * Lista albuns do site.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function indexAlbumsSite()
+    {
+        $albums = Album::where('site' , '=', true)
+            ->get();
+
+        return view('admin.album_site.list', [
+            'albums' => $albums,
+            'breadcrumbs' => [
+                [
+                    'name' => 'Listar Albuns - Site',
+                    'url' => '#',
+                    'class' => 'active'
+                ]
+            ]
+        ]);
     }
 
     /**
@@ -72,7 +92,7 @@ class AlbumController extends Controller
      */
     public function edit($projectId, $albumId)
     {
-        return view('admin.projects.albums.test', [
+        return view('admin.projects.albums.photos', [
             'album' => Album::find($albumId),
             'project' => Project::find($projectId)
         ]);

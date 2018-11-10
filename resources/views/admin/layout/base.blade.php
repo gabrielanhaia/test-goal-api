@@ -10,8 +10,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sufee Admin - HTML5 Admin Template</title>
-    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <title>Goal - Admin</title>
+    <meta name="description" content="Goal - Admin">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" href="apple-icon.png">
@@ -44,8 +44,8 @@
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="./"><img src="{{ URL('admin/images/logo.png') }}" alt="Goal"></a>
-            <a class="navbar-brand hidden" href="./"><img src="{{ URL('admin/images/logo2.png') }}" alt="G"></a>
+            <a class="navbar-brand" href="./"><img src="" alt="Goal - Admin"></a>
+            <a class="navbar-brand hidden" href="./"><img src="" alt="G"></a>
         </div>
 
         @include('admin.layout.menu')

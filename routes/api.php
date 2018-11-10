@@ -18,4 +18,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('images', 'Admin\ImageController@upload');
+Route::delete('images/{id}', 'Admin\ImageController@delete');
 Route::get('images/{album_id}', 'Admin\ImageController@listByAlbum');

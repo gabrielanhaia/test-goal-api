@@ -39,3 +39,7 @@ Route::prefix('projetos')->group(function () {
         Route::get('/editar/{id_album}', 'Admin\AlbumController@edit');
     });
 });
+
+Route::prefix('albuns')->group(function () {
+   Route::get('/', 'Admin\AlbumController@indexAlbumsSite');
+});

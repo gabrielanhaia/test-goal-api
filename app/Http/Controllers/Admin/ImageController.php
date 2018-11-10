@@ -40,6 +40,33 @@ class ImageController extends Controller
         return response()->json(["success" => true]);
     }
 
+    /**
+     * Apaga uma imagem de um album.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function delete(Request $request, $imageId)
+    {
+        $image = Photo::where('uid', '=', $imageId)
+            ->first();
+
+        if (empty($image)) {
+            return response([], 404);
+        }
+
+        $filePath = storage_path('app/public/images/') . $image->saved_name;
+
+        if (!file_exists($filePath)) {
+            return response([], 404);
+        }
+
+        if (!unlink($filePath)) {
+            return response([], 404);
+        }
+
+        $image->delete();
+    }
+
     public function listByAlbum($albumId)
     {
         $album = Album::find($albumId);

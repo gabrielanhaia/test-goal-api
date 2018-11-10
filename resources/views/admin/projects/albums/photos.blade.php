@@ -139,7 +139,7 @@
                                 deleteFile: {
                                     enabled: true,
                                     forceConfirm: true,
-                                    endpoint: 'server/file'
+                                    endpoint: "{{ url('api/images/') }}"
                                 }
                             });
 
