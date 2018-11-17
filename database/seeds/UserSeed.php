@@ -25,6 +25,7 @@ class UserSeed extends Seeder
                 'email' => 'admin@goal.com',
                 'password' => Hash::make('123123'),
                 'access_type_id' => $adminTypeAccess->id,
+                'description' => '.'
             ]);
 
             UserModel::create([

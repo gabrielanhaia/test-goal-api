@@ -18,6 +18,7 @@ class CreateTableAlbums extends Migration
             $table->string('name');
 
             $table->integer('project_id')
+                ->nullable()
                 ->unsigned();
 
             $table->foreign('project_id')

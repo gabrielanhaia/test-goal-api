@@ -87,6 +87,90 @@ class AlbumController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createAlbumSite()
+    {
+        return view('admin.album_site.create', [
+            'breadcrumbs' => [
+                [
+                    'name' => 'Listar Albuns - Site',
+                    'url' => '#',
+                    'class' => 'active'
+                ],
+                [
+                    'name' => 'Criar Album - Site',
+                    'url' => '#',
+                    'class' => 'active'
+                ]
+            ]
+        ]);
+    }
+
+    /**
+     * Cria um novo album do site.
+     *
+     * @param Request $request
+     * @param $projectId
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     */
+    public function storeAlbumSite(Request $request)
+    {
+        $album = new Album([
+            'name' => $request->post('name'),
+            'site' => 1
+        ]);
+
+        $album->save();
+
+        return redirect('albuns');
+    }
+
+    /**
+     * Edita album do site.
+     *
+     * @param integer $albumId Identificador do album.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editAlbumSite($albumId)
+    {
+        return view('admin.album_site.edit', [
+            'album' => Album::find($albumId),
+        ]);
+    }
+
+    /**
+     * Edita album do site.
+     *
+     * @param integer $albumId Identificador do album.
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function updateAlbumSite($albumId, Request $request)
+    {
+        $album = Album::find($albumId);
+
+        $album->update([
+            'name' => $request->post('name'),
+        ]);
+
+        return redirect('albuns');
+    }
+
+    /**
+     * Carrega a página de atualização de fotos de albuns do site.
+     *
+     * @param int $albumId Identificador do album.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editAlbumSiteImages($albumId)
+    {
+        return view('admin.album_site.photos', [
+            'album' => Album::find($albumId),
+        ]);
+    }
+
+    /**
      * @param integer $albumId Identificador do album.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

@@ -41,5 +41,10 @@ Route::prefix('projetos')->group(function () {
 });
 
 Route::prefix('albuns')->group(function () {
-   Route::get('/', 'Admin\AlbumController@indexAlbumsSite');
+    Route::get('/', 'Admin\AlbumController@indexAlbumsSite');
+    Route::get('/cadastrar', 'Admin\AlbumController@createAlbumSite');
+    Route::post('/cadastrar', 'Admin\AlbumController@storeAlbumSite');
+    Route::get('/editar/{id}', 'Admin\AlbumController@editAlbumSite');
+    Route::post('/editar/{id}', 'Admin\AlbumController@updateAlbumSite');
+    Route::get('/editar/{id}/imagens', 'Admin\AlbumController@editAlbumSiteImages');
 });

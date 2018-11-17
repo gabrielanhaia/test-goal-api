@@ -9,7 +9,8 @@ class Album extends Model
     /** @var array $fillable */
     protected $fillable = [
         'name',
-        'project_id'
+        'project_id',
+        'site'
     ];
 
     /**

@@ -36,21 +36,6 @@
 
                 location.reload()
             })
-
-            $('#create_album').click(function (e) {
-                e.preventDefault();
-
-                let hrefCreateAlbum = $('#create_album').attr('href')
-
-                $.ajax(hrefCreateAlbum, {
-                    method: 'POST',
-                    headers: {
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    }
-                }).success(() => {
-                    location.reload();
-                })
-            })
         })
     </script>
 @endsection
@@ -64,7 +49,7 @@
                     <div class="card-header">
                         <strong class="card-title pr-3">Lista de Albuns do Site:</strong>
                         <br><br>
-                        <a id="create_album" href="{{ url("album/cadastrar") }}">
+                        <a id="create_album" href="{{ url("albuns/cadastrar") }}">
                             <button type="button"
                                     class="btn btn-success btn-sm">Cadastrar Novo
                             </button>
@@ -90,6 +75,9 @@
                                         <td>{{ \Carbon\Carbon::parse($album->created_at)->format('d/m/Y H:i') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($album->updated_at)->format('d/m/Y H:i') }}</td>
                                         <td class="text-center">
+                                            <a href="{{ url( 'albuns/editar/' . $album->id . '/imagens') }}" class="pr-2">
+                                                <i class="fa fa-image fa-2x"></i>
+                                            </a>
                                             <a href="{{ url( '/albuns/editar/' . $album->id) }}" class="pr-2">
                                                 <i class="fa fa-pencil fa-2x"></i>
                                             </a>
