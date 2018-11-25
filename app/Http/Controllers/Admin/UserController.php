@@ -142,7 +142,8 @@ class UserController extends Controller
             'password' => Hash::make($request->get('password')),
             'description' => $request->get('description'),
             'email' => $request->get('email'),
-            'access_type_id' => $userType->id
+            'access_type_id' => $userType->id,
+            'api_token' => Hash::make(str_random(60))
         ]);
 
         $user->save();

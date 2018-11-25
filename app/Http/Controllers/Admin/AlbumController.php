@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Album;
+use App\Http\Resources\AlbumSiteCollection;
+use App\Http\Resources\PhotosAlbumSiteCollection;
 use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,7 +18,12 @@ class AlbumController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', [
+            'except' => [
+                'listAlbumsSiteApi',
+                'openAlbumSiteApi'
+            ]
+        ]);
     }
 
     /**
@@ -47,7 +54,7 @@ class AlbumController extends Controller
     }
 
     /**
-     * Lista albuns do site.
+     * Lista albuns do site no admin.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function indexAlbumsSite()
@@ -65,6 +72,27 @@ class AlbumController extends Controller
                 ]
             ]
         ]);
+    }
+
+    /**
+     * Lista os albuns do site no retorno da API.
+     * @return mixed
+     */
+    public function listAlbumsSiteApi()
+    {
+        $albums = Album::where('site' , '=', true)
+            ->get();
+
+        return new AlbumSiteCollection($albums);
+    }
+
+    public function openAlbumSiteApi($albumId)
+    {
+        $album = Album::where('site' , '=', true)
+            ->where('id', '=', $albumId)
+            ->first();
+
+        return new PhotosAlbumSiteCollection($album->photos);
     }
 
     /**

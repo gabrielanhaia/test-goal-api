@@ -17,6 +17,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Rotas do Editor (Fine Upload)
 Route::post('images', 'Admin\ImageController@upload');
 Route::delete('images/{id}', 'Admin\ImageController@delete');
 Route::get('images/{album_id}', 'Admin\ImageController@listByAlbum');
+
+
+Route::prefix('albuns')->group(function () {
+    Route::get('/', 'Admin\AlbumController@listAlbumsSiteApi');
+    Route::get('/{id}', 'Admin\AlbumController@openAlbumSiteApi');
+});

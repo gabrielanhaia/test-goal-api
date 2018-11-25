@@ -94,12 +94,12 @@
 
                         <a class="nav-link" href="#"><i class="fa fa -cog"></i>Configurações</a>
 
-                        <a class="nav-link" href="http://localhost:8000/logout" onclick="event.preventDefault();
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <i class="fa fa-power -off"></i>Deslogar</a>
 
                         <form id="logout-form"
-                              action="http://localhost:8000/logout"
+                              action="{{ route('logout') }}"
                               method="POST" style="display: none;">
                             {!! csrf_field() !!}
                         </form>
