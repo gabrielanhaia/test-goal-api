@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Album;
+use App\Http\Resources\AlbumSiteCollection;
+use App\Http\Resources\PhotosAlbumSiteCollection;
 use App\Project;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -17,7 +21,13 @@ class ProjectController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', [
+            'except' => [
+                'list',
+                'listAlbumsProject',
+                'listPhotosAlbumsProject'
+            ]
+        ]);
     }
 
     /**
@@ -27,7 +37,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        if (Auth::user()->isAdmin()) {
+            $projects = Project::all();
+        } else {
+            $projects = Project::whereHas('users', function ($query) {
+                $query->where('users.id', '=', Auth::user()->id);
+            })->get();
+        }
 
         return view('admin.projects.list', [
             'projects' => $projects,
@@ -114,7 +130,6 @@ class ProjectController extends Controller
 
     public function save(Request $request)
     {
-
         $project = new Project([
             'title' => $request->get('title'),
             'description' => $request->get('description'),
@@ -126,5 +141,69 @@ class ProjectController extends Controller
             ->sync($request->get('users', []));
 
         return redirect('projetos');
+    }
+
+    /**
+     * Lista os projetos de um usuário.
+     *
+     * @return mixed
+     */
+    public function list()
+    {
+        $projects = Project::whereHas('users', function ($query) {
+            $query->where('users.id', '=', Auth::user()->id);
+        })->get();
+
+        return $projects;
+    }
+
+    /**
+     * Lista albuns de um projeto específico.
+     *
+     * @param $idProject
+     * @return AlbumSiteCollection|\Illuminate\Http\JsonResponse
+     */
+    public function listAlbumsProject($idProject)
+    {
+        $project = Project::where('id', '=', $idProject)
+            ->whereHas('users', function ($query) {
+            $query->where('users.id', '=', Auth::user()->id);
+        })->first();
+
+        if (empty($project)) {
+            return response()->json(['Projeto não encontrado.'], 404);
+        }
+
+        return new AlbumSiteCollection($project->albums);
+    }
+
+    /**
+     * Lista fotos de um album especifico de um projeto
+     *
+     * @param $idProject
+     * @return PhotosAlbumSiteCollection
+     */
+    public function listPhotosAlbumsProject($idProject, $idAlbum)
+    {
+        $project = Project::where('id', '=', $idProject)
+            ->whereHas('users', function ($query) {
+                $query->where('users.id', '=', Auth::user()->id);
+            })->first();
+
+        if (empty($project)) {
+            return response()->json(['Projeto não encontrado.'], 404);
+        }
+
+        if (empty($project->albums)) {
+            return response()->json(['Album não encontrado.'], 404);
+        }
+
+        foreach ($project->albums as $album) {
+            if ($album->id == $idAlbum) {
+                return new PhotosAlbumSiteCollection($album->photos);
+            }
+        }
+
+        return response()->json(['Album não encontrado.'], 404);
     }
 }

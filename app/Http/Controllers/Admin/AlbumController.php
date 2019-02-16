@@ -21,7 +21,7 @@ class AlbumController extends Controller
         $this->middleware('auth', [
             'except' => [
                 'listAlbumsSiteApi',
-                'openAlbumSiteApi'
+                'openAlbumSiteApi',
             ]
         ]);
     }

@@ -45,6 +45,14 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->accessType()->first()->type === 'admin';
+    }
+
+    /**
      * The projects that belong to the users.
      */
     public function projects()

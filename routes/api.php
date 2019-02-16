@@ -17,6 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('login', 'ApiLoginController@login');
+
 // Rotas do Editor (Fine Upload)
 Route::post('images', 'Admin\ImageController@upload');
 Route::delete('images/{id}', 'Admin\ImageController@delete');
@@ -27,3 +29,10 @@ Route::prefix('albuns')->group(function () {
     Route::get('/', 'Admin\AlbumController@listAlbumsSiteApi');
     Route::get('/{id}', 'Admin\AlbumController@openAlbumSiteApi');
 });
+
+Route::middleware('auth.jwt')->prefix('projects')->group(function () {
+    Route::get('/', 'Admin\ProjectController@list');
+    Route::get('/{id}/albums', 'Admin\ProjectController@listAlbumsProject');
+    Route::get('/{id}/albums/{id_album}', 'Admin\ProjectController@listPhotosAlbumsProject');
+});
+
