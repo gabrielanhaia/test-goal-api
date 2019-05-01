@@ -90,13 +90,18 @@
                                         <td>{{ \Carbon\Carbon::parse($album->created_at)->format('d/m/Y H:i') }}</td>
                                         <td>{{ \Carbon\Carbon::parse($album->updated_at)->format('d/m/Y H:i') }}</td>
                                         <td class="text-center">
+                                            @can('admin')
                                             <a href="{{ url( 'projetos/'.  $album->project_id . '/albuns/editar/' . $album->id) }}" class="pr-2">
                                                 <i class="fa fa-pencil fa-2x"></i>
                                             </a>
                                             <a class="delete_album"
-                                               href="{{ url('projetos/deletdar/' . $album->id) }}"><i
+                                               href="{{ url('projetos/deletar/' . $album->id) }}"><i
                                                         class="fa fa-trash fa-2x"
                                                         style="color: firebrick"></i>
+                                            </a>
+                                            @endcan
+                                            <a href="{{ url( 'projetos/'.  $album->project_id . '/albuns/visualisar/' . $album->id) }}" class="pr-2">
+                                                <i class="fa fa-image fa-2x"></i>
                                             </a>
                                         </td>
                                     </tr>

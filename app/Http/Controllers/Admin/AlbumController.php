@@ -86,6 +86,15 @@ class AlbumController extends Controller
         return new AlbumSiteCollection($albums);
     }
 
+    public function showAlbumProject($projectId, $albumId)
+    {
+        $album = Album::find($albumId);
+
+        return view('admin.projects.albums.view', [
+            'photos' => $album->photos
+        ]);
+    }
+    
     public function openAlbumSiteApi($albumId)
     {
         $album = Album::where('site' , '=', true)

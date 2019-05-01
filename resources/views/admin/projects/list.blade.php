@@ -73,9 +73,11 @@
                                         <td>{{ $project->address }}</td>
                                         <td>{{ $project->albums->count() }}</td>
                                         <td class="text-center">
+                                            @can('admin')
                                             <a href="{{ url('projetos/editar/' . $project->id) }}" class="pr-2">
                                                 <i class="fa fa-pencil fa-2x"></i>
                                             </a>
+                                            @endcan
                                             <a href="{{ url('projetos/' . $project->id) . '/albuns' }}" class="pr-2">
                                                 <i class="fa fa-image fa-2x"></i>
                                             </a>

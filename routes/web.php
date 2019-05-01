@@ -38,6 +38,7 @@ Route::prefix('projetos')->group(function () {
         Route::get('/o/{id_album}', 'Admin\AlbumController@index');
         Route::post('/cadastrar', 'Admin\AlbumController@create');
         Route::get('/editar/{id_album}', 'Admin\AlbumController@edit');
+        Route::get('/visualizar/{id_album}', 'Admin\AlbumController@showAlbumProject');
     });
 });
 

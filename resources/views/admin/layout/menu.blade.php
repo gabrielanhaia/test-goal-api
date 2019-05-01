@@ -9,13 +9,17 @@
                aria-expanded="false"> <i class="menu-icon fa fa-building"></i>Construções</a>
             <ul class="sub-menu children dropdown-menu">
                 <li><i class="menu-icon fa fa-home"></i><a href="{{ url('projetos') }}">Projetos</a></li>
+                @can('admin')
                 <li><i class="menu-icon fa fa-home"></i><a href="{{ url('albuns') }}">Site</a></li>
+                @endcan
             </ul>
         </li>
-        <h3 class="menu-title">Administração</h3>
+        @can('admin')
+            <h3 class="menu-title">Administração</h3>
 
         <li>
             <a href="{{ url("usuarios") }}"> <i class="menu-icon fa fa-user"></i>Usuários </a>
         </li>
+        @endcan
     </ul>
 </div>
