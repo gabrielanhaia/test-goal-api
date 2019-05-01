@@ -63,12 +63,14 @@
                 <div class="card">
                     <div class="card-header">
                         <strong class="card-title pr-3">Lista de Albuns do Projeto: {{ $project->address }} </strong>
+                        @can('admin')
                         <br><br>
                         <a id="create_album" href="{{ url("projetos/$project->id/albuns/cadastrar") }}">
                             <button type="button"
                                     class="btn btn-success btn-sm">Cadastrar Novo
                             </button>
                         </a>
+                        @endcan
                     </div>
                     <div class="card-body">
                         <table id="bootstrap-data-table" class="table table-striped table-bordered">
