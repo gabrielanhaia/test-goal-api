@@ -102,7 +102,7 @@
                                                         style="color: firebrick"></i>
                                             </a>
                                             @endcan
-                                            <a href="{{ url( 'projetos/'.  $album->project_id . '/albuns/vizualisar/' . $album->id) }}" class="pr-2">
+                                            <a href="{{ url( 'projetos/'.  $album->project_id . '/albuns/visualizar/' . $album->id) }}" class="pr-2">
                                                 <i class="fa fa-image fa-2x"></i>
                                             </a>
                                         </td>
