@@ -24,7 +24,10 @@
     <link rel="stylesheet" href="{{ URL::asset('admin/assets/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ URL::asset('admin/assets/css/cs-skin-elastic.css') }}">
 <!-- <link rel="stylesheet" href="{{ URL::asset('admin/assets/css/bootstrap-select.less') }}"> -->
-    <link rel="stylesheet" href="{{ URL::asset('admin/assets/scss/style.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
+<link rel="stylesheet" href="{{ URL::asset('admin/assets/scss/style.css') }}">
+
     <link href="{{ URL::asset('admin/assets/css/lib/vector-map/jqvmap.min.css') }}" rel="stylesheet">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -150,6 +153,7 @@
 <!-- Right Panel -->
 
 <script src="{{  URL::asset('admin/assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+<script src="{{  URL::asset('admin/assets/js/vendor/slick.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 <script src="{{  URL::asset('admin/assets/js/plugins.js') }}"></script>
 <script src="{{  URL::asset('admin/assets/js/main.js') }}"></script>

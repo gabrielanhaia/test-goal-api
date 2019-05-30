@@ -25,7 +25,16 @@ jQuery(document).ready(function($) {
 		event.preventDefault();
 		event.stopPropagation();
 		$('.search-trigger').parent('.header-left').removeClass('open');
-	});
+    });
+
+    $('.js-slick').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        adaptiveHeight: true,
+      });
+
 
 	// $('.user-area> a').on('click', function(event) {
 	// 	event.preventDefault();

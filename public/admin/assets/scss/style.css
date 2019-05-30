@@ -2238,3 +2238,29 @@ header .form-inline {
           padding: 5px; } }
 
 /*# sourceMappingURL=style.css.map */
+
+.slick-next:before, .slick-prev:before {
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: black;
+}
+
+.cards-body {
+    max-width: 750px;
+    margin: 35px auto;
+}
+
+.cards-body .imagem{
+    transform: scale(.8);
+}
+
+.cards-body .imagem a{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.cards-body .imagem a img{
+    /* transform: scale(.5); */
+}

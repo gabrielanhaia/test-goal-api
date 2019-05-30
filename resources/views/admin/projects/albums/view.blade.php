@@ -30,27 +30,15 @@
                     <div class="card-header">
                         <strong class="card-title pr-3">Lista de fotos</strong>
                     </div>
-                    <div class="card-body">
-                        <table id="bootstrap-data-table" class="table table-striped table-bordered">
-                           <?php
-
-                                $count = 1;
+                    <div class="cards-body">
+                        <div class="js-slick">
+                        <?php
                             foreach ($photos as $key => $photo) {
-                                if ($count === 1 || (($count-1)%3 === 0)) {
-                                    echo '<tr>';
-                                }
-
-                                $url = url('/storage/images/' . $photo->saved_name);
-                                echo "<td><a href='{$url}'><img width='25%' src='{$url}' name='{$photo->name}'></a></td>";
-
-                                if ($count%3 === 0) {
-                                    echo '</tr>';
-                                }
-
-                                $count++;
-                            }
-                           ?>
-                        </table>
+                            $url = url('/storage/images/' . $photo->saved_name);
+                            echo "<div><div class='imagem'><a href='{$url}' title='{$photo->name}' target='_blank'><img src='{$url}' /></a></div></div>";
+                        }
+                        ?>
+                        </div>
                     </div>
                 </div>
             </div>
