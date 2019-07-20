@@ -32,7 +32,7 @@ class AlbumController extends Controller
      * @param $projectId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index($projectId)
+    public function indx($projectId)
     {
         $project = Project::find($projectId);
 
@@ -217,5 +217,22 @@ class AlbumController extends Controller
             'album' => Album::find($albumId),
             'project' => Project::find($projectId)
         ]);
+    }
+
+    /**
+     * Método responsável por deletar um album do site.
+     *
+     * @param $albumId
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteAlbumSite($albumId)
+    {
+        $album = Album::find($albumId);
+
+        if (!empty($album)) {
+            $album->delete();
+        }
+
+        return back();
     }
 }

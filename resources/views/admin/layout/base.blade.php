@@ -47,8 +47,8 @@
                     aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="./"><img src="" alt="Goal - Admin"></a>
-            <a class="navbar-brand hidden" href="./"><img src="" alt="G"></a>
+            <a class="navbar-brand" href="./">Goal - Admin</a>
+            <a class="navbar-brand hidden" href="./">G</a>
         </div>
 
         @include('admin.layout.menu')

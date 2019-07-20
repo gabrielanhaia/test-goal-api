@@ -132,8 +132,8 @@ class ProjectController extends Controller
     {
         $project = new Project([
             'title' => $request->get('title'),
-            'description' => $request->get('description'),
-            'address' => $request->get('address'),
+            'description' => $request->post('description', ''),
+            'address' => $request->get('address', ''),
         ]);
 
         $project->save();
