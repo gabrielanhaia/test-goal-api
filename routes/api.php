@@ -2,6 +2,19 @@
 
 use Illuminate\Http\Request;
 
+Route::post('send-email', function (Illuminate\Http\Request $request) {
+    $to      = 'contato@goalconstrucoes.com.br';
+    $subject = 'Contato site - ' . $request->post('name');
+    $message = "Nome: " . $request->post('name') . "\r\n" . "Mensagem: " . $request->post('mensagem') . "\r\n" . "Telefone: " . $request->post('phone');
+	$from = $request->post('email');
+    $headers = "From: {$from}" . "\r\n" .
+        'Reply-To: contato@goalconstrucoes.com.br' . "\r\n" .
+        'X-Mailer: PHP/' . phpversion();
+
+	mail($to, $subject, $message, $headers);
+});
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
